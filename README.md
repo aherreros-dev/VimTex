@@ -4,6 +4,8 @@
 [![Lua](https://img.shields.io/badge/lua-%232C2D72.svg?style=for-the-badge&logo=lua&logoColor=white)](https://www.lua.org/)
 [![LaTeX](https://img.shields.io/badge/latex-%23008080.svg?style=for-the-badge&logo=latex&logoColor=white)](https://www.latex-project.org/)
 
+![Neovim Dashboard](https://raw.githubusercontent.com/aherreros-dev/VimTex/main/screenshot.png)
+
 A Neovim configuration optimized for academic writing and LaTeX document preparation.
 
 ## Features
