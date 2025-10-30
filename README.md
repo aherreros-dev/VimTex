@@ -26,14 +26,30 @@ A Neovim configuration optimized for academic writing and LaTeX document prepara
 - latexmk
 - PDF viewer (zathura, skim, or evince)
 
-### Setup
+### Quick Install
+
+**Backup your current config first!**
 
 ```bash
-git clone <repository-url> ~/.config/nvim
+# Backup existing config
+mv ~/.config/nvim ~/.config/nvim.backup
+
+# Clone this configuration
+git clone https://github.com/aherreros-dev/VimTex.git ~/.config/nvim
+
+# Start Neovim (plugins will install automatically)
 nvim
 ```
 
-Plugins will install automatically on first launch.
+### Manual Install
+
+If you want to review the configuration first:
+
+```bash
+git clone https://github.com/aherreros-dev/VimTex.git
+cd VimTex
+# Review files, then copy to ~/.config/nvim
+```
 
 ## Plugin List
 
