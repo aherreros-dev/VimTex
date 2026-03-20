@@ -150,4 +150,6 @@ Configuration provided as-is. Individual plugins maintain their respective licen
 
 ---
 
-**Last Updated**: 2025-10-30
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=700&size=30&pause=0&color=FF0000&background=000000&center=true&vCenter=true&width=220&height=60&lines=redr4ven" alt="Ajuste del SVG de redr4ven" />
+</p>
