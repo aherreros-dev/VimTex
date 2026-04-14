@@ -29,21 +29,21 @@ return {
       json = { "jsonlint" },
     }
 
-    -- Customize linter icons and formatting
+    -- Customize linter icons and formatting with Nerd Font symbols
     local icons = {
-      python = "🐍",
-      javascript = "🟨",
-      typescript = "📘",
-      lua = "🌙",
-      bash = "💻",
-      sh = "💻",
-      markdown = "📝",
-      json = "🎨",
+      python = " ",
+      javascript = " ",
+      typescript = " ",
+      lua = " ",
+      bash = " ",
+      sh = " ",
+      markdown = " ",
+      json = " ",
     }
 
     -- Add custom formatting for lint messages
     for ft, _ in pairs(lint.linters_by_ft) do
-      local icon = icons[ft] or "⚠️"
+      local icon = icons[ft] or "●"
       -- Format linter output with custom icons
     end
 
