@@ -29,7 +29,7 @@ return {
     require("barbecue").setup({
       attach_navic = true,
       show_modified = true,
-      exclude_filetypes = { "gitcommit", "fugitive", "Trouble" },
+      exclude_filetypes = { "gitcommit", "fugitive", "Trouble", "neo-tree", "toggleterm" },
       
       symbols = {
         separator = " › ",
@@ -68,9 +68,6 @@ return {
       context_follow_icon_color = true,
       include_buftypes = { "", "terminal" },
     })
-
-    -- Asegurar que barbecue se muestre en el WinBar
-    vim.opt.winbar = "%{%v:lua.require'barbecue.ui'.get()%}"
 
     -- Highlight groups
     vim.api.nvim_set_hl(0, "BarbecueNormal", { fg = gruvbox_fg, bg = gruvbox_bg })
