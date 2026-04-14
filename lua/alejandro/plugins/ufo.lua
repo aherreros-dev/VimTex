@@ -65,9 +65,6 @@ return {
     vim.o.foldcolumn = "1"
     vim.o.foldtext = ""
 
-    -- Setup handler for builtin fold commands to accept UFO capabilities
-    local builtin = require("statuscol.builtin")
-
     require("ufo").setup({
       provider_selector = function(bufnr, filetype, buftype)
         return { "treesitter", "indent" }

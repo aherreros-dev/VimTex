@@ -14,57 +14,11 @@
 return {
   "folke/flash.nvim",
   event = "VeryLazy",
-  ---@type Flash.Config
   opts = {
-    labels = "abcdefghijklmnopqrstuvwxyz",
     search = {
       multi_window = true,
       forward = true,
       wrap = true,
-      incremental = false,
-    },
-    jump = {
-      jumplist = true,
-      pos = "start", -- 'start' or 'end'
-      history = true,
-      register = true,
-      nohlsearch = false,
-    },
-    label = {
-      uppercase = true,
-      before = true,
-      after = true,
-      reuse = "lowercase",
-    },
-    highlight = {
-      backdrop = true,
-      matches = true,
-      priority = 5000,
-    },
-    action = nil,
-    pattern = "", -- shown in the label window when using incremental search
-    prompt = "Flash: ",
-    win_opts = {
-      relative = "editor",
-      width = 20,
-      height = 1,
-      row = -1,
-      col = 0,
-      zindex = 1000,
-    },
-    modes = {
-      search = {
-        enabled = true,
-      },
-      char = {
-        enabled = true,
-        -- dynamic configuration
-        config = function(opts)
-          -- autohide flash when in operator-pending mode
-          opts.autohide =
-            opts.autohide or (vim.fn.mode(true):find("no") and vim.v.operator == "y")
-        end,
-      },
     },
   },
   keys = {
@@ -99,14 +53,6 @@ return {
         require("flash").treesitter_search()
       end,
       desc = "Flash Treesitter Search",
-    },
-    {
-      "<c-s>",
-      mode = { "c" },
-      function()
-        require("flash").toggle()
-      end,
-      desc = "Toggle Flash Search",
     },
   },
 }

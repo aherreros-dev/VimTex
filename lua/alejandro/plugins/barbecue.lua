@@ -34,10 +34,5 @@ return {
   },
   config = function(_, opts)
     require("barbecue").setup(opts)
-
-    -- Keymap to jump to the breadcrumb context
-    vim.keymap.set("n", "<leader>bc", function()
-      require("barbecue.ui").toggle()
-    end, { noremap = true, silent = true })
   end,
 }

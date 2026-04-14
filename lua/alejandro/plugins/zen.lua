@@ -16,24 +16,16 @@ return {
   {
     "folke/twilight.nvim",
     cmd = { "Twilight", "TwilightEnable", "TwilightDisable" },
-    opts = {
-      dimming = {
-        alpha = 0.25, -- amount of dimming
-        color = { "Normal", "#ffffff" },
-        term_bg = "#000000",
-        inactive = false,
-      },
-      context = 10, -- lines of context to show
-      treesitter = true, -- use treesitter for smarter dimming
-      exclude = {
-        "help", -- don't dim help files
-        "NvimTree",
-        "which-key",
-        "Trouble",
-      },
-    },
-    config = function(_, opts)
-      require("twilight").setup(opts)
+    config = function()
+      require("twilight").setup({
+        dimming = {
+          alpha = 0.25,
+          color = { "Normal", "#ffffff" },
+          inactive = false,
+        },
+        context = 10,
+        treesitter = true,
+      })
 
       vim.keymap.set("n", "<leader>tw", "<cmd>Twilight<CR>", { noremap = true, silent = true })
     end,
@@ -41,41 +33,35 @@ return {
   {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
-    opts = {
-      window = {
-        backdrop = 0.95, -- shade the backdrop of the Zen window
-        width = 0.85, -- width of the Zen window (percentage of screen width)
-        height = 0.85, -- height of the Zen window (percentage of screen height)
-        options = {
-          signcolumn = "no", -- disable signcolumn (for gitsigns, etc.)
-          number = false, -- disable line numbers
-          relativenumber = false, -- disable relative line numbers
-          cursorline = false, -- disable cursor line
-          cursorcolumn = false, -- disable cursor column
-          foldcolumn = "0", -- disable fold column
-          list = false, -- disable whitespace characters
+    dependencies = "folke/twilight.nvim",
+    config = function()
+      require("zen-mode").setup({
+        window = {
+          backdrop = 0.95,
+          width = 0.85,
+          height = 0.85,
+          options = {
+            signcolumn = "no",
+            number = false,
+            relativenumber = false,
+            cursorline = false,
+            cursorcolumn = false,
+            foldcolumn = "0",
+            list = false,
+          },
         },
-      },
-      plugins = {
-        options = {
-          enabled = true,
-          ruler = false, -- disables the ruler text in the cmd line area
-          showcmd = false, -- disables the command in the last line of the screen
-          laststatus = 0, -- turn off the statusline in zen mode
+        plugins = {
+          options = {
+            enabled = true,
+            ruler = false,
+            showcmd = false,
+            laststatus = 0,
+          },
+          twilight = { enabled = true },
+          gitsigns = { enabled = false },
+          tmux = { enabled = false },
         },
-        twilight = { enabled = true }, -- enable twilight when zen mode is active
-        gitsigns = { enabled = false }, -- disable gitsigns
-        tmux = { enabled = false }, -- disables the tmux statusline
-      },
-      on_open = function(win)
-        -- Add any custom behavior when entering zen mode
-      end,
-      on_close = function()
-        -- Add any custom behavior when exiting zen mode
-      end,
-    },
-    config = function(_, opts)
-      require("zen-mode").setup(opts)
+      })
 
       vim.keymap.set("n", "<leader>z", "<cmd>ZenMode<CR>", { noremap = true, silent = true })
     end,
