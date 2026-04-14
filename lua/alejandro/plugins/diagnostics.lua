@@ -12,6 +12,8 @@
 --]]
 
 return {
+  "neovim/nvim-lspconfig",
+  lazy = true,
   config = function()
     local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
     for type, icon in pairs(signs) do
@@ -23,9 +25,6 @@ return {
     vim.diagnostic.config({
       virtual_text = {
         prefix = "●",
-        format = function(diagnostic)
-          return string.format("%s - %s", diagnostic.message, diagnostic.source)
-        end,
       },
       signs = true,
       underline = true,
@@ -36,7 +35,6 @@ return {
         style = "minimal",
         border = "solid",
         source = true,
-        header = { "Diagnostics", "DiagnosticFloatingInfo" },
       },
     })
 
