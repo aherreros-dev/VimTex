@@ -21,6 +21,7 @@ return {
           "-file-line-error",
           "-synctex=1",
           "-interaction=nonstopmode",
+          "-halt-on-error",
         },
       }
 
@@ -33,6 +34,17 @@ return {
       vim.g.vimtex_fold_enabled = 1
       vim.g.vimtex_fold_manual = 1
       vim.g.vimtex_syntax_enabled = 1
+      
+      -- Enhanced error reporting
+      vim.g.vimtex_quickfix_ignore_unknown_warnings = 0
+      vim.g.vimtex_quickfix_warnings_enabled = 1
+      
+      -- Keybindings for LaTeX
+      local opts = { noremap = true, silent = true }
+      vim.keymap.set("n", "<leader>ll", ":VimtexCompile<CR>", opts)
+      vim.keymap.set("n", "<leader>lv", ":VimtexView<CR>", opts)
+      vim.keymap.set("n", "<leader>lt", ":VimtexTocToggle<CR>", opts)
+      vim.keymap.set("n", "<leader>le", ":VimtexErrors<CR>", opts)
     end,
   },
 
@@ -44,11 +56,40 @@ return {
         texlab = {
           settings = {
             texlab = {
-              build = { onSave = true },
+              -- Build settings
+              build = {
+                onSave = true,
+                forwardSearchAfterBuild = true,
+                executable = "latexmk",
+                args = {
+                  "-pdf",
+                  "-verbose",
+                  "-file-line-error",
+                  "-synctex=1",
+                  "-interaction=nonstopmode",
+                  "-halt-on-error",
+                },
+              },
+              -- Forward search for Skim on macOS
+              forwardSearch = {
+                executable = "open",
+                args = { "-a", "Skim", "%p", "-g", "%l" },
+              },
+              -- Formatter settings
               latexFormatter = "latexindent",
               latexindent = {
                 ["local"] = nil,
-                modifyLineBreaks = false,
+                modifyLineBreaks = true,
+                indent = "2 spaces",
+              },
+              -- Diagnostics settings for better error detection
+              diagnostics = {
+                ignoredPatterns = {},
+                delay = 300,
+              },
+              -- Experimental features
+              experimental = {
+                mathEnvironmentName = true,
               },
             },
           },

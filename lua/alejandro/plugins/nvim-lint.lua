@@ -27,6 +27,8 @@ return {
       sh = { "shellcheck" },
       markdown = { "markdownlint" },
       json = { "jsonlint" },
+      tex = { "chktex" },
+      latex = { "chktex" },
     }
 
     -- Customize linter icons and formatting with Nerd Font symbols
@@ -39,6 +41,8 @@ return {
       sh = " ",
       markdown = " ",
       json = " ",
+      tex = "∑",
+      latex = "∑",
     }
 
     -- Add custom formatting for lint messages
