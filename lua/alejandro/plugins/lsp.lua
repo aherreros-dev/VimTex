@@ -39,6 +39,9 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
+    -- Suprimir warnings de deprecación
+    vim.g.lspconfig_server_perf_format_output = false
+    
     -- Configurar texlab para LaTeX
     lspconfig.texlab.setup({
       capabilities = capabilities,
