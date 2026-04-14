@@ -15,38 +15,79 @@ return {
   "neovim/nvim-lspconfig",
   lazy = true,
   config = function()
-    local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
-    for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    -- Define diagnostic signs with meaningful icons
+    local signs = {
+      Error = { text = "󰅚", texthl = "DiagnosticSignError" },
+      Warn = { text = "󰀪", texthl = "DiagnosticSignWarn" },
+      Hint = { text = "󰌶", texthl = "DiagnosticSignHint" },
+      Info = { text = "", texthl = "DiagnosticSignInfo" },
+    }
+
+    for type, config in pairs(signs) do
+      vim.fn.sign_define("Diagnostic" .. type, config)
     end
 
-    -- Configure diagnostics display
+    -- Define custom highlight groups for better visibility
+    vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", { undercurl = true, sp = "#fb4934" })
+    vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn", { undercurl = true, sp = "#fe8019" })
+    vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { undercurl = true, sp = "#83a598" })
+    vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo", { undercurl = true, sp = "#8ec07c" })
+
+    -- Configure diagnostics display with enhanced virtual text
     vim.diagnostic.config({
       virtual_text = {
-        prefix = "●",
+        prefix = "",
+        format = function(diagnostic)
+          local severity = vim.diagnostic.severity[diagnostic.severity]
+          local message = diagnostic.message:match("^%s*(.-)%s*$")
+          local source = diagnostic.source or "Unknown"
+          return string.format("[%s] %s — %s", severity, message, source)
+        end,
+        spacing = 4,
       },
-      signs = true,
-      underline = true,
+      signs = {
+        text = {
+          [vim.diagnostic.severity.ERROR] = signs.Error.text,
+          [vim.diagnostic.severity.WARN] = signs.Warn.text,
+          [vim.diagnostic.severity.HINT] = signs.Hint.text,
+          [vim.diagnostic.severity.INFO] = signs.Info.text,
+        },
+        texthl = {
+          [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+          [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+          [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+          [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+        },
+      },
+      underline = {
+        severity = {
+          min = vim.diagnostic.severity.HINT,
+        },
+      },
       update_in_insert = false,
       severity_sort = true,
       float = {
         focusable = true,
         style = "minimal",
-        border = "solid",
-        source = true,
+        border = "rounded",
+        source = "always",
+        header = { "Diagnostics", "DiagnosticFloatingInfo" },
+        max_width = 100,
       },
     })
 
+    -- Custom namespace for better control
+    local namespace = vim.api.nvim_create_namespace("diagnostics")
+
     -- Improved LSP hover
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-      border = "solid",
+      border = "rounded",
       max_width = 80,
     })
 
     -- Improved LSP signature help
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-      border = "solid",
+      border = "rounded",
     })
 
     -- Keybindings for diagnostics
