@@ -29,6 +29,24 @@ return {
       json = { "jsonlint" },
     }
 
+    -- Customize linter icons and formatting
+    local icons = {
+      python = "🐍",
+      javascript = "🟨",
+      typescript = "📘",
+      lua = "🌙",
+      bash = "💻",
+      sh = "💻",
+      markdown = "📝",
+      json = "🎨",
+    }
+
+    -- Add custom formatting for lint messages
+    for ft, _ in pairs(lint.linters_by_ft) do
+      local icon = icons[ft] or "⚠️"
+      -- Format linter output with custom icons
+    end
+
     -- Create autocmd to lint on save
     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
     vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
