@@ -17,55 +17,67 @@ return {
     "SmiteshP/nvim-navic",
     "nvim-tree/nvim-web-devicons",
   },
+  event = "BufReadPost",
   config = function()
+    -- Gruvbox dark theme colors
+    local gruvbox_bg = "#282828"
+    local gruvbox_fg = "#ebdbb2"
+    local gruvbox_aqua = "#83a598"
+    local gruvbox_orange = "#fe8019"
+    local gruvbox_red = "#fb4934"
+
     require("barbecue").setup({
-      theme = "auto",
-      exclude_filetypes = { "gitcommit", "fugitive", "Trouble", "packer", "neo-tree" },
-      
+      attach_navic = true,
       show_modified = true,
+      exclude_filetypes = { "gitcommit", "fugitive", "Trouble" },
       
-      -- Beautiful separators and symbols
       symbols = {
-        separator = "  ",  -- Flecha bonita como separador
-        modified = "●",     -- Punto rojo para modificados
+        separator = " › ",
+        modified = " ●",
       },
       
-      -- Define custom theme with colors
+      -- Gruvbox theme
       theme = {
         normal = {
-          fg = "#abb2bf",
-          bg = "#282c34",
-        },
-        ellipsis = {
-          fg = "#808080",
-          bg = "#282c34",
+          fg = gruvbox_fg,
+          bg = gruvbox_bg,
         },
         separator = {
-          fg = "#61afef",
-          bg = "#282c34",
+          fg = gruvbox_aqua,
+          bg = gruvbox_bg,
         },
         modified = {
-          fg = "#e06c75",
-          bg = "#282c34",
+          fg = gruvbox_orange,
+          bg = gruvbox_bg,
+        },
+        dirname = {
+          fg = gruvbox_aqua,
+          bg = gruvbox_bg,
+        },
+        basename = {
+          bold = true,
+          fg = gruvbox_fg,
+          bg = gruvbox_bg,
+        },
+        context = {
+          fg = gruvbox_orange,
+          bg = gruvbox_bg,
         },
       },
       
-      -- Enable icons from web-devicons
-      show_navic = true,
-      
-      -- Context separator padding
       context_follow_icon_color = true,
+      include_buftypes = { "", "terminal" },
     })
 
-    -- Setup custom highlight groups for better visuals
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_set_hl(0, "Barbecue", { bg = "#1e222a", fg = "#abb2bf" })
-    vim.api.nvim_set_hl(0, "BarbecueSeparator", { bg = "#1e222a", fg = "#61afef" })
-    vim.api.nvim_set_hl(0, "BarbecueModified", { bg = "#1e222a", fg = "#e06c75" })
-    
-    -- Optional: Toggle barbecue with a keymap
-    vim.keymap.set("n", "<leader>bc", function()
-      vim.cmd("Barbecue")
-    end, opts)
+    -- Asegurar que barbecue se muestre en el WinBar
+    vim.opt.winbar = "%{%v:lua.require'barbecue.ui'.get()%}"
+
+    -- Highlight groups
+    vim.api.nvim_set_hl(0, "BarbecueNormal", { fg = gruvbox_fg, bg = gruvbox_bg })
+    vim.api.nvim_set_hl(0, "BarbecueSeparator", { fg = gruvbox_aqua, bg = gruvbox_bg })
+    vim.api.nvim_set_hl(0, "BarbecueModified", { fg = gruvbox_orange, bg = gruvbox_bg })
+    vim.api.nvim_set_hl(0, "BarbecueDirname", { fg = gruvbox_aqua, bg = gruvbox_bg })
+    vim.api.nvim_set_hl(0, "BarbecueBasename", { fg = gruvbox_fg, bg = gruvbox_bg, bold = true })
+    vim.api.nvim_set_hl(0, "BarbecueContext", { fg = gruvbox_orange, bg = gruvbox_bg })
   end,
 }
