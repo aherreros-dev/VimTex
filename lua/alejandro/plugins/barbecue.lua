@@ -17,22 +17,55 @@ return {
     "SmiteshP/nvim-navic",
     "nvim-tree/nvim-web-devicons",
   },
-  opts = {
-    -- Barbecue theme - matches your colorscheme
-    theme = "auto",
+  config = function()
+    require("barbecue").setup({
+      theme = "auto",
+      exclude_filetypes = { "gitcommit", "fugitive", "Trouble", "packer", "neo-tree" },
+      
+      show_modified = true,
+      
+      -- Beautiful separators and symbols
+      symbols = {
+        separator = "  ",  -- Flecha bonita como separador
+        modified = "●",     -- Punto rojo para modificados
+      },
+      
+      -- Define custom theme with colors
+      theme = {
+        normal = {
+          fg = "#abb2bf",
+          bg = "#282c34",
+        },
+        ellipsis = {
+          fg = "#808080",
+          bg = "#282c34",
+        },
+        separator = {
+          fg = "#61afef",
+          bg = "#282c34",
+        },
+        modified = {
+          fg = "#e06c75",
+          bg = "#282c34",
+        },
+      },
+      
+      -- Enable icons from web-devicons
+      show_navic = true,
+      
+      -- Context separator padding
+      context_follow_icon_color = true,
+    })
+
+    -- Setup custom highlight groups for better visuals
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_set_hl(0, "Barbecue", { bg = "#1e222a", fg = "#abb2bf" })
+    vim.api.nvim_set_hl(0, "BarbecueSeparator", { bg = "#1e222a", fg = "#61afef" })
+    vim.api.nvim_set_hl(0, "BarbecueModified", { bg = "#1e222a", fg = "#e06c75" })
     
-    -- Create a custom theme that works with your setup
-    exclude_filetypes = { "gitcommit", "fugitive", "Trouble", "packer" },
-    
-    -- Show modified indicator
-    show_modified = true,
-    
-    -- Breadcrumb separator
-    symbols = {
-      separator = " > ",
-    },
-  },
-  config = function(_, opts)
-    require("barbecue").setup(opts)
+    -- Optional: Toggle barbecue with a keymap
+    vim.keymap.set("n", "<leader>bc", function()
+      vim.cmd("Barbecue")
+    end, opts)
   end,
 }
