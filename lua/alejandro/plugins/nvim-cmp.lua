@@ -1,3 +1,11 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  COMPLETION ENGINE (NVIM-CMP)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Autocomplete engine with LSP, snippet, and buffer sources.
+  Provides intelligent code completion with multiple sources.
+--]]
+
 return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",

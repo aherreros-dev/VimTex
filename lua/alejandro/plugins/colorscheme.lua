@@ -1,3 +1,11 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  COLOR SCHEME
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Nightfly colorscheme for dark theme with custom Tokyo Night variant available.
+  Provides syntax highlighting and UI colors for consistency.
+--]]
+
 return {
   -- CUSTOM TOKYO NIGHT THEME
   --{

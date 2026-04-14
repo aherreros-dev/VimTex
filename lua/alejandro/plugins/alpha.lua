@@ -1,3 +1,11 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ALPHA DASHBOARD
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Customizable startup dashboard with ASCII art header and quick-access buttons.
+  Displays when opening Neovim with no file specified.
+--]]
+
 return {
   "goolord/alpha-nvim",
   event = "VimEnter",

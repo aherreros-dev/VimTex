@@ -1,3 +1,13 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  LANGUAGE SERVER PROTOCOL (LSP)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Configures language servers for code intelligence:
+  - texlab: LaTeX support with intelligent completion
+  - lua_ls: Lua language server for Neovim configuration
+  Features: go to definition, hover docs, code actions, formatting
+--]]
+
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },

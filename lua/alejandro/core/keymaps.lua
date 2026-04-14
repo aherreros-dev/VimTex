@@ -1,4 +1,14 @@
- -- set leader key to space
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  KEYBINDINGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Core keybindings for:
+  - Navigation: insert mode exit, window/tab management
+  - Editing: increment/decrement numbers, search clearing
+  - UI: split window operations, formatting
+--]]
+
+-- set leader key to space
 vim.g.mapleader = " "
 
 local keymap = vim.keymap -- for conciseness

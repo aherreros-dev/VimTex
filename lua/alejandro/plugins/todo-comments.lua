@@ -1,3 +1,11 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TODO HIGHLIGHTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Highlights and localizes TODO, FIXME, BUG, HACK, and similar comments.
+  Helps track important code annotations.
+--]]
+
 return {
   "folke/todo-comments.nvim",
   event = { "BufReadPre", "BufNewFile" },

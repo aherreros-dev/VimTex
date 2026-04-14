@@ -1,3 +1,11 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  AUTO-PAIRS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Automatically inserts closing brackets, quotes, and parentheses.
+  Reduces typing and maintains balanced bracket syntax.
+--]]
+
 return {
   "windwp/nvim-autopairs",
   event = { "InsertEnter" },

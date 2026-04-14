@@ -1,3 +1,11 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  LIVE PREVIEW SERVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Live preview server for HTML files with auto-refresh on save.
+  Opens HTML files in Firefox Developer Edition with live reload.
+--]]
+
 return {
   {
     "brianhuster/live-preview.nvim",

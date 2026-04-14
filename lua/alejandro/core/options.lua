@@ -1,3 +1,14 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EDITOR OPTIONS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Sets global Neovim editor preferences:
+  - UI: line numbers, relative numbering, cursor line
+  - Indentation: tabs to spaces, auto-indent
+  - Search: case-insensitive with smart case
+  - Performance: proper terminal colors, clipboard integration
+--]]
+
 vim.cmd("let g:netrw_liststyle =3")
 
 local opt = vim.opt --for conciseness

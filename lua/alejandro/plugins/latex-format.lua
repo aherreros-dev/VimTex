@@ -1,3 +1,11 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CONFORM - CODE FORMATTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Formats LaTeX files using latexindent.
+  Auto-formats on save with LSP fallback support.
+--]]
+
 -- ~/.config/nvim/lua/plugins/latex-format.lua
 return {
   {

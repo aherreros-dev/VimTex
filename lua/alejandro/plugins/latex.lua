@@ -1,3 +1,11 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  VIMTEX - LATEX SUPPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Comprehensive LaTeX editing with automatic compilation via latexmk.
+  Supports PDF viewing (Skim on macOS), code folding, and smart completion.
+--]]
+
 return {
   {
     "lervag/vimtex",

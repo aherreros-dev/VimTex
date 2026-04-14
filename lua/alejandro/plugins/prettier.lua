@@ -1,4 +1,12 @@
 -- ~/.config/nvim/lua/plugins/prettier.lua
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CODE FORMATTER (PRETTIER)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Opinionated code formatter for JavaScript/TypeScript with LSP integration.
+  Auto-formats code on save.
+--]]
+
 return {
   {
     "MunifTanjim/prettier.nvim",

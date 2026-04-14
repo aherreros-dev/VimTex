@@ -1,3 +1,11 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  SUBSTITUTE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Replacement operator for more intuitive text substitution.
+  Better alternative to Vim's default substitute behavior.
+--]]
+
 return {
   "gbprod/substitute.nvim",
   event = { "BufReadPre", "BufNewFile" },

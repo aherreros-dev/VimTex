@@ -1,3 +1,10 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CORE CONFIGURATION LOADER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Loads core editor options, keymaps, and vimtex settings for LaTeX support.
+--]]
+
 require("alejandro.core.options")
 require("alejandro.core.keymaps")
 

@@ -1,3 +1,11 @@
+--[[
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TELESCOPE FUZZY FINDER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Fuzzy finder for files, text search, and more with FZF native support.
+  Enables fast file navigation and text search across the project.
+--]]
+
 return {
   "nvim-telescope/telescope.nvim",
   branch = "0.1.x",
