@@ -5,8 +5,6 @@ return {
     "hrsh7th/cmp-nvim-lsp",
   },
   config = function()
-    local lspconfig = require("lspconfig")
-    
     -- Obtener capacidades mejoradas si tienes nvim-cmp instalado
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
@@ -39,11 +37,10 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    -- Suprimir warnings de deprecación
-    vim.g.lspconfig_server_perf_format_output = false
-    
-    -- Configurar texlab para LaTeX
-    lspconfig.texlab.setup({
+    -- Configurar texlab para LaTeX usando nueva API
+    vim.lsp.config("texlab", {
+      cmd = { "texlab" },
+      filetypes = { "tex", "bib" },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
@@ -58,9 +55,12 @@ return {
         },
       },
     })
+    vim.lsp.enable("texlab")
 
-    -- Configurar lua_ls para Neovim
-    lspconfig.lua_ls.setup({
+    -- Configurar lua_ls para Neovim usando nueva API
+    vim.lsp.config("lua_ls", {
+      cmd = { "lua-language-server" },
+      filetypes = { "lua" },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
@@ -80,10 +80,11 @@ return {
         },
       },
     })
+    vim.lsp.enable("lua_ls")
 
-    -- Agrega más servidores LSP aquí según necesites
+    -- Agrega más servidores LSP aquí según necesites usando vim.lsp.config()
     -- Ejemplos:
-    -- lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
-    -- lspconfig.tsserver.setup({ capabilities = capabilities, on_attach = on_attach })
+    -- vim.lsp.config("pyright", { ... })
+    -- vim.lsp.enable("pyright")
   end,
 }
