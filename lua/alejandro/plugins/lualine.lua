@@ -11,73 +11,93 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local lualine = require("lualine")
-    local lazy_status = require("lazy.status") -- Para mostrar actualizaciones pendientes en Lazy.nvim
+    local lazy_status = require("lazy.status")
 
-    --[[ 
-    -- Definición de colores personalizados (COMENTADO para evitar interferencias)
-    local colors = {
-      blue = "#65D1FF",
-      green = "#3EFFDC",
-      violet = "#FF61EF",
-      yellow = "#FFDA7B",
-      red = "#FF4A4A",
-      fg = "#c3ccdc",
-      bg = "#112638",
-      inactive_bg = "#2c3043",
-    }
-
-    local my_lualine_theme = {
-      normal = {
-        a = { bg = colors.blue, fg = colors.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
+    -- GRUVBOX THEME (desactivado, conservado para recuperar)
+    --[[
+    lualine.setup({
+      options = { theme = "gruvbox" },
+      sections = {
+        lualine_x = {
+          { lazy_status.updates, cond = lazy_status.has_updates, color = { fg = "#fabd2f" } },
+          { "encoding" }, { "fileformat" }, { "filetype" },
+        },
       },
-      insert = {
-        a = { bg = colors.green, fg = colors.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
-      },
-      visual = {
-        a = { bg = colors.violet, fg = colors.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
-      },
-      command = {
-        a = { bg = colors.yellow, fg = colors.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
-      },
-      replace = {
-        a = { bg = colors.red, fg = colors.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
-      },
-      inactive = {
-        a = { bg = colors.inactive_bg, fg = colors.semilightgray, gui = "bold" },
-        b = { bg = colors.inactive_bg, fg = colors.semilightgray },
-        c = { bg = colors.inactive_bg, fg = colors.semilightgray },
-      },
-    }
+    })
     ]]
 
-    -- Configurar Lualine con el tema Gruvbox
+    -- AURA THEME — colores neon sobre fondo oscuro Aura
+    local aura_colors = {
+      bg       = "#15141b",
+      bg_dark  = "#0f0e15",
+      surface  = "#1d1c24",
+      fg       = "#edecee",
+      comment  = "#6d6d6d",
+      purple   = "#a277ff",  -- accent principal Aura
+      pink     = "#f694ff",  -- rosa neon
+      cyan     = "#61ffca",  -- verde/cian neon
+      blue     = "#82e2ff",  -- azul claro
+      orange   = "#ffca85",  -- naranja/amarillo
+      red      = "#ff6767",  -- rojo
+    }
+
+    local aura_theme = {
+      normal = {
+        a = { bg = aura_colors.purple, fg = aura_colors.bg, gui = "bold" },
+        b = { bg = aura_colors.surface, fg = aura_colors.fg },
+        c = { bg = aura_colors.bg, fg = aura_colors.comment },
+      },
+      insert = {
+        a = { bg = aura_colors.cyan, fg = aura_colors.bg, gui = "bold" },
+        b = { bg = aura_colors.surface, fg = aura_colors.fg },
+        c = { bg = aura_colors.bg, fg = aura_colors.comment },
+      },
+      visual = {
+        a = { bg = aura_colors.pink, fg = aura_colors.bg, gui = "bold" },
+        b = { bg = aura_colors.surface, fg = aura_colors.fg },
+        c = { bg = aura_colors.bg, fg = aura_colors.comment },
+      },
+      command = {
+        a = { bg = aura_colors.orange, fg = aura_colors.bg, gui = "bold" },
+        b = { bg = aura_colors.surface, fg = aura_colors.fg },
+        c = { bg = aura_colors.bg, fg = aura_colors.comment },
+      },
+      replace = {
+        a = { bg = aura_colors.red, fg = aura_colors.bg, gui = "bold" },
+        b = { bg = aura_colors.surface, fg = aura_colors.fg },
+        c = { bg = aura_colors.bg, fg = aura_colors.comment },
+      },
+      inactive = {
+        a = { bg = aura_colors.bg_dark, fg = aura_colors.comment, gui = "bold" },
+        b = { bg = aura_colors.bg_dark, fg = aura_colors.comment },
+        c = { bg = aura_colors.bg_dark, fg = aura_colors.comment },
+      },
+    }
+
     lualine.setup({
       options = {
-        theme = "gruvbox",
+        theme = aura_theme,
+        globalstatus = true,
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
       },
       sections = {
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_c = { { "filename", path = 1 } },
         lualine_x = {
           {
             lazy_status.updates,
             cond = lazy_status.has_updates,
-            color = { fg = "#fabd2f" }, -- Mantener color distintivo para Lazy.nvim
+            color = { fg = aura_colors.orange },
           },
           { "encoding" },
           { "fileformat" },
           { "filetype" },
         },
+        lualine_y = { "progress" },
+        lualine_z = { "location" },
       },
     })
   end,
 }
-

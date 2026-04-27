@@ -2,8 +2,8 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   COLOR SCHEME
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Nightfly colorscheme for dark theme with custom Tokyo Night variant available.
-  Provides syntax highlighting and UI colors for consistency.
+  Catppuccin Mocha con overrides inspirados en Aura Theme:
+  fondo azul/morado muy oscuro + colores neon (rosa, verde, púrpura).
 --]]
 
 return {
@@ -46,15 +46,90 @@ return {
       --vim.cmd([[colorscheme tokyonight]])
     --end,
   --},
-  --
-  --
-  -- GRUVBOX THEME
+
+  -- GRUVBOX THEME (desactivado, conservado para recuperar)
+  --{
+  --"morhetz/gruvbox",
+  --priority = 1000,
+  --config = function()
+  --  vim.o.background = "dark"
+  --  vim.cmd([[colorscheme gruvbox]])
+  --end,
+  --},
+
+  -- AURA THEME (catppuccin mocha con colores Aura)
   {
-  "morhetz/gruvbox",
-  priority = 1000, -- Asegura que se cargue antes que otros plugins
-  config = function()
-    vim.o.background = "dark" -- O "light" si prefieres
-    vim.cmd([[colorscheme gruvbox]])
-  end,
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup({
+        flavour = "mocha",
+        background = { dark = "mocha" },
+        transparent_background = false,
+        show_end_of_buffer = false,
+        term_colors = true,
+        dim_inactive = { enabled = false },
+        color_overrides = {
+          mocha = {
+            -- Fondos Aura: azul/morado muy oscuro
+            base    = "#15141b",
+            mantle  = "#0f0e15",
+            crust   = "#0a0910",
+            -- Superficies
+            surface0 = "#1d1c24",
+            surface1 = "#252430",
+            surface2 = "#302e3d",
+            -- Overlays / comentarios
+            overlay0 = "#6d6d6d",
+            overlay1 = "#8a8a9a",
+            overlay2 = "#a0a0b0",
+            -- Texto
+            text     = "#edecee",
+            subtext1 = "#d8d7da",
+            subtext0 = "#c4c3c8",
+            -- Colores neon Aura
+            mauve    = "#a277ff",  -- púrpura neon (accent principal)
+            lavender = "#a277ff",
+            pink     = "#f694ff",  -- rosa neon
+            flamingo = "#f694ff",
+            rosewater= "#ff6767",
+            red      = "#ff6767",  -- rojo Aura
+            maroon   = "#ff6767",
+            peach    = "#ffca85",  -- naranja Aura
+            yellow   = "#ffca85",
+            green    = "#61ffca",  -- verde/cian neon Aura
+            teal     = "#61ffca",
+            sky      = "#82e2ff",  -- azul claro Aura
+            sapphire = "#82e2ff",
+            blue     = "#82e2ff",
+          },
+        },
+        integrations = {
+          cmp           = true,
+          gitsigns      = true,
+          nvimtree      = true,
+          treesitter    = true,
+          telescope     = { enabled = true },
+          which_key     = true,
+          indent_blankline = { enabled = true },
+          lsp_trouble   = true,
+          bufferline    = true,
+          noice         = true,
+          dashboard     = true,
+          barbecue      = { dim_dirname = true, bold_basename = true },
+          native_lsp = {
+            enabled = true,
+            underlines = {
+              errors      = { "undercurl" },
+              hints       = { "undercurl" },
+              warnings    = { "undercurl" },
+              information = { "undercurl" },
+            },
+          },
+        },
+      })
+      vim.cmd.colorscheme("catppuccin")
+    end,
   },
 }
