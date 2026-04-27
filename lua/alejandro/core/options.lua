@@ -11,6 +11,9 @@
 
 vim.cmd("let g:netrw_liststyle =3")
 
+-- TinyTeX binaries
+vim.env.PATH = vim.env.HOME .. "/Library/TinyTeX/bin/universal-darwin:" .. vim.env.PATH
+
 local opt = vim.opt --for conciseness
 
 --line numbers 

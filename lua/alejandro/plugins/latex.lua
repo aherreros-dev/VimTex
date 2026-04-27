@@ -15,31 +15,36 @@ return {
       vim.g.vimtex_quickfix_mode = 0
       vim.g.vimtex_compiler_method = "latexmk"
       vim.g.vimtex_compiler_latexmk = {
+        executable = vim.env.HOME .. "/.local/bin/latexmk-auto",
         options = {
           "-pdf",
           "-verbose",
           "-file-line-error",
           "-synctex=1",
           "-interaction=nonstopmode",
-          "-halt-on-error",
         },
       }
-
-      if vim.fn.has("macunix") == 1 then
-        vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
-      end
 
       vim.g.vimtex_complete_enabled = 1
       vim.g.vimtex_complete_close_braces = 1
       vim.g.vimtex_fold_enabled = 1
       vim.g.vimtex_fold_manual = 1
       vim.g.vimtex_syntax_enabled = 1
-      
-      -- Enhanced error reporting
-      vim.g.vimtex_quickfix_ignore_unknown_warnings = 0
-      vim.g.vimtex_quickfix_warnings_enabled = 1
-      
-      -- Keybindings for LaTeX
+
+      -- Auto-start continuous compilation when opening a tex file.
+      -- latexmk stays running and picks up every save automatically.
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "tex",
+        callback = function()
+          vim.defer_fn(function()
+            local ok, state = pcall(function() return vim.b.vimtex end)
+            if ok and state then
+              vim.cmd("VimtexCompile")
+            end
+          end, 300)
+        end,
+      })
+
       local opts = { noremap = true, silent = true }
       vim.keymap.set("n", "<leader>ll", ":VimtexCompile<CR>", opts)
       vim.keymap.set("n", "<leader>lv", ":VimtexView<CR>", opts)
@@ -56,41 +61,18 @@ return {
         texlab = {
           settings = {
             texlab = {
-              -- Build settings
               build = {
-                onSave = true,
-                forwardSearchAfterBuild = true,
+                onSave = false,
+                forwardSearchAfterBuild = false,
                 executable = "latexmk",
-                args = {
-                  "-pdf",
-                  "-verbose",
-                  "-file-line-error",
-                  "-synctex=1",
-                  "-interaction=nonstopmode",
-                  "-halt-on-error",
-                },
+                args = { "-pdf", "-synctex=1", "-interaction=nonstopmode" },
               },
-              -- Forward search for Skim on macOS
               forwardSearch = {
                 executable = "open",
                 args = { "-a", "Skim", "%p", "-g", "%l" },
               },
-              -- Formatter settings
               latexFormatter = "latexindent",
-              latexindent = {
-                ["local"] = nil,
-                modifyLineBreaks = true,
-                indent = "2 spaces",
-              },
-              -- Diagnostics settings for better error detection
-              diagnostics = {
-                ignoredPatterns = {},
-                delay = 300,
-              },
-              -- Experimental features
-              experimental = {
-                mathEnvironmentName = true,
-              },
+              diagnostics = { delay = 300 },
             },
           },
         },
@@ -98,4 +80,3 @@ return {
     },
   },
 }
-

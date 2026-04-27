@@ -2,23 +2,20 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   CONFORM - CODE FORMATTER
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Formats LaTeX files using latexindent.
-  Auto-formats on save with LSP fallback support.
+  Auto-formats on save. LaTeX excluded — formatting handled by vimtex.
 --]]
 
--- ~/.config/nvim/lua/plugins/latex-format.lua
 return {
   {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        tex = { "latexindent" },
+        tex = {},
       },
-      format_on_save = {
-        timeout_ms = 1000,
-        lsp_fallback = true,
-      },
+      format_on_save = function(bufnr)
+        if vim.bo[bufnr].filetype == "tex" then return end
+        return { timeout_ms = 1000, lsp_fallback = true }
+      end,
     },
   },
 }
-
